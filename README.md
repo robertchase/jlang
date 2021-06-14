@@ -20,3 +20,5 @@ as `/opt/scripts`)
 [main j software site](https://www.jsoftware.com)
 
 [useful learning guide](https://www.jsoftware.com/help/learning/contents.htm)
+
+[vocabulary](https://code.jsoftware.com/wiki/NuVoc)
