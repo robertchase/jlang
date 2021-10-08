@@ -41,7 +41,9 @@ NB. grab the day count for the month and adjust for leap year (if february)
 )
 
 NB. days since year zero CCYYMMDD
-base =: 3 : '(diy y)+(+/isleap i.year)+365*year=.0{"1 (0 10000)#:y'"0
+NB. x =: 3 : '0{"1 (0 10000)#:y'
+NB. +/"1 isleap i."0 x 2 2$19600101
+base =: 3 : '(diy y)+(+/isleap i.year)+365*year=.0{(0 10000)#:y'"0
 
 NB. age in days
 age =: 3 : '(base +/10000 100 1*x:0 1 2{6!:0'''')-base >(0=#y){y;19580915'
