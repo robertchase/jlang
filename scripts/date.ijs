@@ -11,4 +11,5 @@ NB. days since year zero CCYYMMDD (not accurate for days before gregorian calend
 base =: 3 : '(diy y)+(+/"1 isleap >:i."0<:year)+365*year=.y<.@%10000'
 
 NB. age in days
-age =: 3 : '(base +/10000 100 1*x:0 1 2{6!:0'''')-base >(0=#y){y;19580915'
+DOB =: 19580915
+age =: 3 : '(base +/10000 100 1*x:0 1 2{6!:0'''')-base >(0=#y){y;DOB'
