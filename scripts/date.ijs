@@ -13,3 +13,6 @@ base =: 3 : '(diy y)+(+/"1 isleap >:i."0<:year)+365*year=.y<.@%10000'
 NB. age in days
 DOB =: 19580915
 age =: 3 : '(base +/10000 100 1*x:0 1 2{6!:0'''')-base >(0=#y){y;DOB'
+
+NB. table of ages and prime factors
+agerange =: 3 : '(|:,:a);"1 |:,:(<@({.~ i.&0)@>)"0 <"1 q:a=.(age'''')+i.>(0=#y){y;10'
