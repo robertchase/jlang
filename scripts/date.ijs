@@ -8,7 +8,7 @@ NB. number of days in month CCYYMM
 dim =: 3 : '((m=2)*>:-.isleap y<.@%100)-~(<:m=.100|y){(7$31 30),5$31 30'
 
 NB. days since year zero CCYYMMDD (not accurate for days before gregorian calendar)
-base =: 3 : '(diy y)+(+/"1 isleap >:i."0<:year)+365*year=.y<.@%10000'
+base =: 3 : '(diy y)+(+/"1 isleap i."0 year)+365*year=.y<.@%10000'
 
 NB. age in days
 DOB =: 19580915
