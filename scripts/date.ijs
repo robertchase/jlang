@@ -18,4 +18,7 @@ DOB =: 19580915
 age =: 3 : '(base +/10000 100 1*x:0 1 2{6!:0 i.0)-base DOB dflt y'
 
 NB. table of ages and prime factors
-agerange =: 3 : '(;"0 <@({.~ i.&0)@q:)(age i.0)+i.10 dflt y'
+agerange =: 3 : '(;"0 <@q:)(age i.0)+i.10 dflt y'
+
+NB. number of days to next prime
+nextprime =: 3 : 'i.&1,1=#@q:(i.100)+age y'
