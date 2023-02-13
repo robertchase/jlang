@@ -157,3 +157,32 @@ euler_15 =: 12 ": euler_15_general 20
 
 NB. sum of digits of 2**1000
 euler_16 =: +/".,.1000":2^1000
+
+NB. number letter counts up to 1000
+d2e =: 3 : 0 "0
+    ones =. <;._1'  one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen'
+    tens =. <;._1'   twenty thirty forty fifty sixty seventy eighty ninety'
+    thousands =. <;._1 '  thousand million billion trillion quadrillion quintillion hexillion heptillion octillion nonillion decillion'
+    lo =. 100&|
+    hi =. <.@%&100
+    h =. ({&ones@hi,{&('';'hundred')@*@hi),{&('and';'')@*@(0&=@lo+0&=@hi)
+    l=.({&tens@<.@%&10,{&ones@(10&|))`({&ones)@.(20&>)@lo
+    normalize =. (}.~3&|@#)@('00'&,@":)
+    trim =. (}.@;@:(<@(' '&,)@>))@#~0&~:@#@>"0
+
+    digits =. normalize y
+    modify =. |.{.&thousands %&3#digits
+
+    result =. a:
+    while. #digits do.
+        chunk =. ".3{.digits
+        digits =. 3}.digits
+        if. chunk>0 do.
+            result =. result, (h,l)chunk
+            result =. result, {.modify
+        end.
+        modify =. }.modify
+    end.
+    trim result
+)
+euler_17 =: #(#~' '&~:),d2e 1+i.1000
