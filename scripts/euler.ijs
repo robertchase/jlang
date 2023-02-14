@@ -159,19 +159,21 @@ NB. sum of digits of 2**1000
 euler_16 =: +/".,.1000":2^1000
 
 NB. number letter counts up to 1000
-d2e =: 3 : 0 "0
+n2w =: 3 : 0 "0  NB. turn a number into words
     ones =. <;._1'  one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen'
     tens =. <;._1'   twenty thirty forty fifty sixty seventy eighty ninety'
     thousands =. <;._1 '  thousand million billion trillion quadrillion quintillion hexillion heptillion octillion nonillion decillion'
-    lo =. 100&|
-    hi =. <.@%&100
-    h =. ({&ones@hi,{&('';'hundred')@*@hi),{&('and';'')@*@(0&=@lo+0&=@hi)
-    l=.({&tens@<.@%&10,{&ones@(10&|))`({&ones)@.(20&>)@lo
-    normalize =. (}.~3&|@#)@('00'&,@":)
-    trim =. (}.@;@:(<@(' '&,)@>))@#~0&~:@#@>"0
+
+    lo =. 100&|  NB. lower two digits
+    hi =. <.@%&100  NB. hundredths digit
+    h =. ({&ones@hi,{&('';'hundred')@*@hi),{&('and';'')@*@(0&=@lo+0&=@hi)  NB. hundred in words
+    l=.({&tens@<.@%&10,{&ones@(10&|))`({&ones)@.(20&>)@lo  NB. lower two digits in words
+
+    normalize =. (}.~3&|@#)@('00'&,@":)  NB. force length to multiple of three
+    trim =. (}.@;@:(<@(' '&,)@>))@#~0&~:@#@>"0  NB. remove empty boxes, add a blank to the start of each word, unbox
 
     digits =. normalize y
-    modify =. |.{.&thousands %&3#digits
+    modify =. |.{.&thousands %&3#digits  NB. grab appropriate number of thousands names
 
     result =. a:
     while. #digits do.
@@ -185,4 +187,34 @@ d2e =: 3 : 0 "0
     end.
     trim result
 )
-euler_17 =: #(#~' '&~:),d2e 1+i.1000
+euler_17 =: #(#~' '&~:),n2w 1+i.1000  NB. don't count spaces
+
+NB. maximum path sum through triangle
+tri =: 0 : 0
+75
+95 64
+17 47 82
+18 35 87 10
+20 04 82 47 65
+19 01 23 75 03 34
+88 02 77 73 07 63 67
+99 65 04 28 06 16 70 92
+41 41 26 56 83 40 80 70 33
+41 48 72 33 47 32 37 16 94 29
+53 71 44 65 25 43 91 52 97 51 14
+70 11 33 28 77 73 17 78 39 68 17 57
+91 71 52 38 17 14 91 43 58 50 27 29 48
+63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+)
+NB. work up from base adding largest child to node above
+max_path =: 3 : 0
+    data =. <@".;._2 y
+    result =. 2>./\>{:data  NB. largest of each pair
+    while. 1<#data do.
+        data =. }: data
+        result =. 2&(>./\)`]@.(1&=@#)result+>{:data
+    end.
+    result
+)
+euler_18 =: max_path tri
