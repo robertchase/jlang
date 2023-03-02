@@ -207,14 +207,17 @@ tri =: 0 : 0
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 )
-NB. work up from base adding largest child to node above
+NB. each node had two child nodes, work up from base adding largest (greatest) child to node above
 max_path =: 3 : 0
     data =. <@".;._2 y
     result =. 2>./\>{:data  NB. largest of each pair
-    while. 1<#data do.
+    while. 1<#data do.  NB. could do this as a recursion...
         data =. }: data
         result =. 2&(>./\)`]@.(1&=@#)result+>{:data
     end.
     result
 )
 euler_18 =: max_path tri
+
+NB. number of months starting with sunday from 1901-01 to 2000-12
+euler_19 =: +/0=7|+/\2,(1200)$(36$3 0,t),3 1,t=.(5$3 2),5$3 2  NB. starts on tuesday
