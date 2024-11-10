@@ -1,5 +1,6 @@
 NB. sum of multiples of 3 or 5 up to 1000
 euler_1 =: +/a#~+./0=3 5|/a=.i.1000
+euler_1 =: +/ ( #~ +./ @: (0 & =) @: (3 5 & (|/)) ) i.1000
 
 NB. first y fibonacci numbers: 0 1 1 2 3 5...
 fibonacci =: 3 : 0
@@ -22,7 +23,7 @@ NB. largest prime factor of 600851475143
 euler_3 =: {:q:600851475143
 
 is_palindrome =: 3 : '*/(=|.)":y'
-is_palindrome =: */@(=|.)@":"0
+is_palindrome =: */ @ (=|.) @ ":"0
 
 NB. largest palindrome that is the product of two three digit numbers
 euler_4 =: >./,(*is_palindrome)(*/])900+i.100  NB. just look at the largest 100 three digit numbers
